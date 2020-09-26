@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+$rootPath = dirname(__FILE__);
+
+define('ROOT_PATH', $rootPath);
+
+define('PUBLIC_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR);
+
 require_once('connection.php');
 
 if (isset($_GET['controller'])) {

@@ -1,7 +1,7 @@
 
 <?php
 $controllers = array(
-    'pages' => ['home', 'error'],
+    'pages' => ['error'],
     'posts' => ['index'],
     'accounts' => ['signup'] // bổ sung thêm
 ); // Các controllers trong hệ thống và các action có thể gọi ra từ controller đó.

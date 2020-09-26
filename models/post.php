@@ -12,16 +12,16 @@ class Post
         $this->content = $content;
     }
 
-    static function all()
-    {
-        $list = [];
-        $db = DB::getInstance();
-        $req = $db->query('SELECT * FROM posts');
+//     static function all()
+//     {
+//         $list = [];
+//         $db = DB::getInstance();
+//         $req = $db->query('SELECT * FROM posts');
 
-        foreach ($req->fetchAll() as $item) {
-            $list[] = new Post($item['id'], $item['title'], $item['content']);
-        }
+//         foreach ($req->fetchAll() as $item) {
+//             $list[] = new Post($item['id'], $item['title'], $item['content']);
+//         }
 
-        return $list;
-    }
+//         return $list;
+//     }
 }
