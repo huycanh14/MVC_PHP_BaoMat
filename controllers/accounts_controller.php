@@ -44,7 +44,7 @@ class AccountsController extends BaseController
 
                 $username = trim($_POST['username']);
 
-                $password = trim($_POST['password']);
+                $password = trim($_POST['passwordsha1']);
 
                 $email = trim($_POST['email']);
 
@@ -56,9 +56,9 @@ class AccountsController extends BaseController
                     $errors[] = 'Số điện thoại không hợp lệ';
                 }
 
-                if (strlen($password) > 15) {
-                    $errors[] = 'Mật khẩu chỉ được tối đa 15 kí tự';
-                }
+                // if (strlen($password) > 15) {
+                //     $errors[] = 'Mật khẩu chỉ được tối đa 15 kí tự';
+                // }
 
                 $emailCheck  = $this->_account->checkEmail($email);
 
@@ -69,11 +69,11 @@ class AccountsController extends BaseController
                     if ($result) {
                         $result = $this->_password->createPassword((int)$result, $password);
                         if ($result)
-                            $flag = 'Thêm thành công.';
-                        else $errors[] = 'Xảy ra lỗi, không thể thêm tài khoản';
+                            $flag = 'Đăng ký thành công.';
+                        else $errors[] = 'Xảy ra lỗi, không thể đăng ký tài khoản';
                     } else {
 
-                        $errors[] = 'Xảy ra lỗi, không thể thêm tài khoản';
+                        $errors[] = 'Xảy ra lỗi, không thể đăng ký tài khoản';
                     }
                 }
             }

@@ -50,7 +50,8 @@
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Password không được bỏ trống">
-                    <input class="input100" type="password" name="password" placeholder="Password">
+                    <input class="input100" type="password" name="password" placeholder="Password" id="password-signup">
+                    <input class="input100" type="hidden" name="passwordsha1" placeholder="Password" id="passwordsha1">
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
                         <i class="fa fa-lock" aria-hidden="true"></i>

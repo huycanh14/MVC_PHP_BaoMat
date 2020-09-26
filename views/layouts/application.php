@@ -40,7 +40,9 @@
         })
     </script>
     <!--===============================================================================================-->
+    <script src="public/js/sha1.js"></script>
     <script src="public/js/main.js"></script>
+    <script src="public/js/event.js"></script>
 
 </body>
 
