@@ -32,7 +32,6 @@ class Account extends Model
         $query->bindParam(':address', $address, PDO::PARAM_STR);
         $query->execute();
         // $result = $query->fetch();
-        var_dump($this->_conn->lastInsertId());
         return $this->_conn->lastInsertId();
     }
 

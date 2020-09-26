@@ -2,15 +2,18 @@
 <?php
 require_once('controllers/base_controller.php');
 require_once('models/account.php');
+require_once('models/password.php');
 
 class AccountsController extends BaseController
 {
     private $_account;
+    private $_password;
 
     function __construct()
     {
         $this->folder = 'pages';
         $this->_account = new Account();
+        $this->_password = new Password();
     }
 
     public function signup()
@@ -64,11 +67,13 @@ class AccountsController extends BaseController
                 } else {
                     $result = $this->_account->signUp($username, $email, $phone, $address);
                     if ($result) {
-
-                        $flag = 'Thêm thành công.';
+                        $result = $this->_password->createPassword((int)$result, $password);
+                        if ($result)
+                            $flag = 'Thêm thành công.';
+                        else $errors[] = 'Xảy ra lỗi, không thể thêm tài khoản';
                     } else {
 
-                        $errors[] = 'Xảy ra lỗi, không thể thêm admin';
+                        $errors[] = 'Xảy ra lỗi, không thể thêm tài khoản';
                     }
                 }
             }
