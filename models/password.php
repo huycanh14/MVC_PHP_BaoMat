@@ -27,4 +27,15 @@ class Password extends Model
         $query->execute();
         return $this->_conn->lastInsertId();
     }
+
+    function checkPassword($password, $account_id)
+    {
+        $sql = "SELECT * FROM " . $this->table . " WHERE account_id = :account_id ORDER BY created_at DESC LIMIT 0, 1";
+        $query = $this->_conn->prepare($sql);
+
+        $query->bindValue(':account_id', (int)$account_id, PDO::PARAM_INT);
+        $query->execute();
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }

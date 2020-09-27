@@ -1,5 +1,10 @@
-
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
+<?php
+// session_start();
 require_once('controllers/base_controller.php');
 require_once('models/account.php');
 require_once('models/password.php');
@@ -56,10 +61,6 @@ class AccountsController extends BaseController
                     $errors[] = 'Số điện thoại không hợp lệ';
                 }
 
-                // if (strlen($password) > 15) {
-                //     $errors[] = 'Mật khẩu chỉ được tối đa 15 kí tự';
-                // }
-
                 $emailCheck  = $this->_account->checkEmail($email);
 
                 if ($emailCheck) {
@@ -84,6 +85,52 @@ class AccountsController extends BaseController
             'flag' => $flag
         ];
         $this->render('signup', $data);
+    }
+
+    public function signin()
+    {
+        $errors = [];
+
+        if (isset($_POST['submit'])) {
+
+            if ($_POST['password'] == null || empty($_POST['password'])) {
+                $errors[] = 'Vui lòng nhập mật khẩu.';
+            }
+
+            if ($_POST['email'] == null || empty($_POST['email'])) {
+                $errors[] = 'Vui lòng nhập email.';
+            }
+
+            if (count($errors) == 0) {
+
+                $password = trim($_POST['passwordsha1']);
+
+                $email = trim($_POST['email']);
+
+                $emailCheck  = $this->_account->getEmail($email);
+
+                if ($emailCheck) {
+                    $result = $this->_password->checkPassword($password, $emailCheck['id']);
+                    if ($result) {
+                        if ($result["password"] === $password) {
+                            $_SESSION['user'] = ['username' => $emailCheck['email'], 'password' => $password];
+                            header('Location: ?controller=home&action=index');
+                        } else {
+                            $errors[] = "Thông tin đăng nhập không đúng";
+                        }
+                    } else {
+                        $errors[] = "Thông tin đăng nhập không đúng";
+                    }
+                } else {
+                    $errors[] = 'Thông tin đăng nhập không đúng';
+                }
+            }
+        }
+
+        $data = [
+            'errors' => $errors,
+        ];
+        $this->render('signin', $data);
     }
 
     public function error()

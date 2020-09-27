@@ -44,4 +44,14 @@ class Account extends Model
         $query->execute();
         return $query->fetch() ? true : false;
     }
+
+    function getEmail($email)
+    {
+        $sql = "SELECT * FROM " . $this->table . " WHERE email = :email";
+        $query = $this->_conn->prepare($sql);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->setFetchMode(PDO::FETCH_ASSOC);
+        $query->execute();
+        return $query->fetch();
+    }
 }

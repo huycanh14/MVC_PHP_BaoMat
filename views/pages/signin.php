@@ -1,0 +1,75 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+if (isset($_SESSION['user'])) {
+    header('Location: ?controller=home&action=index');
+}
+?>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="public/images/img-01.png" alt="IMG">
+            </div>
+
+            <form class="login100-form validate-form" method="POST">
+                <span class="login100-form-title">
+                    Member Login
+                </span>
+                <?php
+                if (count($errors) > 0) :
+                    foreach ($errors as $key => $value) :
+                ?>
+                        <div class="form-group">
+                            <label class="control-label col-md-12 col-sm-12 col-xs-12" style="color: red;">
+                                <?php echo $value; ?>
+                            </label>
+                        </div>
+                <?php
+                    endforeach;
+                endif;
+                ?>
+
+                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <input class="input100" type="text" name="email" placeholder="Email">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input class="input100" type="password" name="password" placeholder="Password" id="password-login">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <input class="input100" type="hidden" name="passwordsha1" id="passwordsha-login">
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" name="submit" type="submit">
+                        Login
+                    </button>
+                </div>
+
+                <div class="text-center p-t-12">
+                    <span class="txt1">
+                        Forgot
+                    </span>
+                    <a class="txt2" href="#">
+                        Username / Password?
+                    </a>
+                </div>
+
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="?controller=accounts&action=signup">
+                        Create your Account
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
